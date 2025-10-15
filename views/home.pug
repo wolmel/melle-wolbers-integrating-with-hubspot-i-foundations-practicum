@@ -1,0 +1,21 @@
+doctype html
+html 
+     head 
+         title= `${title}`
+         meta(name="viewport" content="width=device-width, initial-scale=1")
+         link(rel="stylesheet", href="/css/style.css")
+     body    
+         h1 Favorites
+         .cards 
+             each favorite in data
+                 .card 
+                     h2.card__id #{favorite.id}
+                     p.card__createdAt Created At: #{favorite.createdAt}
+                        p.card__updatedAt Updated At: #{favorite.updatedAt}
+                        p.card__archived Archived: #{favorite.archived}
+                        if favorite.properties
+                            p.card__name Name: #{favorite.properties.name}
+                            p.card__book Book: #{favorite.properties.book}
+                            p.card__game Game : #{favorite.properties.game}
+
+

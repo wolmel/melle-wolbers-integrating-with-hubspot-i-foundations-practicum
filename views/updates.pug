@@ -1,0 +1,19 @@
+doctype html
+html 
+     head 
+         title= `${title}`
+         meta(name="viewport" content="width=device-width, initial-scale=1")
+         link(rel="stylesheet", href="/css/style.css")
+     body
+     form(method='GET', action='/update-cobj')
+      label(for='name') Name:
+      input#name(type='text', name='name', required=true, placeholder='Enter name')
+
+      label(for='book') Favorite Book:
+      input#book(type='text', name='book', required=true, placeholder='Enter favorite book')
+
+      label(for='game') Favorite Game:
+      input#game(type='text', name='game', required=true, placeholder='Enter favorite game')
+
+      button(type='submit') Submit Update
+
