@@ -1,0 +1,26 @@
+doctype html
+html 
+  head 
+    title= `${title}`
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body    
+    h1 Favorites
+
+    a(href='/', class='button') Add/Update this table
+
+    table
+      thead
+        tr
+          th Name
+          th Book
+          th Game
+      tbody
+        each favorite in data
+          tr
+            if favorite.properties
+              td= favorite.properties.name
+              td= favorite.properties.book
+              td= favorite.properties.game
+            else
+              td(colspan='3') No properties available

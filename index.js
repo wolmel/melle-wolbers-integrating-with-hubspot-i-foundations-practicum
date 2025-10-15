@@ -31,7 +31,7 @@ app.get('/', async (req, res) => {
     try {
         const resp = await axios.get(home, { headers });
         const data = resp.data.results;
-        res.render('home', { title: 'Home | HubSpot APIs', data});      
+        res.render('homepage', { title: 'Home | HubSpot APIs', data});      
     } catch (error) {
         console.error(error);
     }
@@ -41,32 +41,7 @@ app.get('/', async (req, res) => {
 
 // * Code for Route 2 goes here
 app.get('/update-cobj', async (req, res) => {
-
-    const { name, book, game } = req.query;
-
-    const newFavorite = {
-    properties: {
-      name,
-      book,
-      game
-    }
-  };
-
-    const updates = `https://api.hubapi.com/crm/v3/objects/p147025274_favorites`;
-
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    };
-
-    res.render('updates', { username: req.query.name, Book: req.query.book, Game: req.query.game, title: 'Update Favorites | HubSpot APIs' });
-
-    try { 
-        await axios.post(updates, newFavorite, { headers } );
-        res.redirect('back'); //is deprecated 
-    } catch(err) {
-        console.error(err);
-    }
+    res.render('updates', { username: req.body.name, Book: req.body.book, Game: req.body.game, title: 'Update Favorites | HubSpot APIs' });
 });
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
@@ -74,7 +49,7 @@ app.get('/update-cobj', async (req, res) => {
 // * Code for Route 3 goes here
 app.post('/update-cobj', async (req, res) => {
 
-    const { name, book, game } = req.query;
+    const { name, book, game } = req.body;
 
     const newFavorite = {
     properties: {
@@ -93,15 +68,11 @@ app.post('/update-cobj', async (req, res) => {
 
     try { 
         await axios.post(updates, newFavorite, { headers } );
-        res.redirect('back');
+        res.redirect('/');
     } catch(err) {
         console.error(err);
     }
-
-    res.render('updates', { username: req.query.name, book: req.query.book, game: req.query.game, title: 'Update Favorites | HubSpot APIs' });
 });
-
-
 
 // * Localhost
 app.listen(3000, () => console.log('Listening on http://localhost:3000'));
